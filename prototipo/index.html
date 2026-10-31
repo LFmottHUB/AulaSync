@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#167469" />
+    <title>AulaSync · Calendario</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <aside class="sidebar">
+      <a class="brand" href="./"
+        ><span class="brand-icon">a<span>↗</span></span
+        >AulaSync<span class="version">DEMO</span></a
+      >
+      <div class="workspace">
+        <span class="workspace-icon">▦</span>
+        <div>
+          <strong>Mi espacio de trabajo</strong
+          ><small>Gestión de aulas y equipos</small>
+        </div>
+      </div>
+      <div class="nav-label">ESPACIO DE TRABAJO</div>
+      <div class="nav-active">
+        <span>▦</span> Calendario <span class="nav-dot"></span>
+      </div>
+      <div class="mini-heading">
+        <strong id="mini-title"></strong>
+        <div>
+          <button id="mini-prev" aria-label="Mes anterior">‹</button
+          ><button id="mini-next" aria-label="Mes siguiente">›</button>
+        </div>
+      </div>
+      <div class="mini-week">
+        <span>L</span><span>M</span><span>M</span><span>J</span><span>V</span
+        ><span>S</span><span>D</span>
+      </div>
+      <div id="mini-calendar" class="mini-calendar"></div>
+      <div class="calendar-heading">
+        <span>MIS CALENDARIOS</span><button id="all-calendars">Todos</button>
+      </div>
+      <div id="calendar-filters"></div>
+      <div class="sidebar-note">
+        <span>◇</span><strong>Una vista, todos tus calendarios</strong>
+        <p>Consulta cada requerimiento sin perder su origen.</p>
+      </div>
+      <div class="profile">
+        <span class="avatar">AS</span>
+        <div>
+          <strong>Espacio de demostración</strong
+          ><small>America/Lima · UTC−5</small>
+        </div>
+      </div>
+    </aside>
+    <main>
+      <header class="topbar">
+        <div>
+          <span class="breadcrumb">Mi espacio</span><span class="slash">/</span
+          ><strong>Calendario</strong>
+        </div>
+        <div class="top-actions">
+          <span class="local-badge"><i></i>Vista previa local</span
+          ><button
+            id="help-button"
+            class="icon-button"
+            aria-label="Acerca de esta demo"
+          >
+            ?</button
+          ><span class="avatar small">AS</span>
+        </div>
+      </header>
+      <section class="page-heading">
+        <div>
+          <div class="eyebrow">TU JORNADA, A SIMPLE VISTA</div>
+          <h1>Calendario</h1>
+          <p>Organiza tu mirada. Cada aula, cada equipo, cada horario.</p>
+        </div>
+        <span class="demo-label">◈ Prototipo visual · Datos ficticios</span>
+      </section>
+      <section class="summary" aria-label="Resumen del período visible">
+        <div>
+          <span class="stat-icon teal">▦</span>
+          <div>
+            <span>Eventos visibles</span><strong id="event-count">0</strong>
+          </div>
+        </div>
+        <div>
+          <span class="stat-icon blue">⌂</span>
+          <div>
+            <span>Aulas identificadas</span><strong id="room-count">0</strong>
+          </div>
+        </div>
+        <div>
+          <span class="stat-icon purple">◫</span>
+          <div>
+            <span>Calendarios activos</span
+            ><strong id="calendar-count">7</strong>
+          </div>
+        </div>
+        <div>
+          <span class="stat-icon amber">◇</span>
+          <div>
+            <span>Por revisar</span><strong id="review-count">0</strong>
+          </div>
+          <span class="stat-hint">Datos incompletos o discrepantes</span>
+        </div>
+      </section>
+      <section class="calendar-shell">
+        <div class="toolbar">
+          <div class="date-navigation">
+            <button id="today" class="button">Hoy</button>
+            <div class="arrows">
+              <button id="previous" aria-label="Período anterior">‹</button
+              ><button id="next" aria-label="Período siguiente">›</button>
+            </div>
+            <h2 id="date-title"></h2>
+          </div>
+          <div class="view-controls">
+            <span class="timezone">GMT−5</span>
+            <div class="segmented" aria-label="Vista de calendario">
+              <button data-view="day">Día</button
+              ><button data-view="week" class="active">Semana</button
+              ><button data-view="agenda">Agenda</button>
+            </div>
+          </div>
+        </div>
+        <div class="filterbar">
+          <div class="filter-input">
+            <span>⌕</span
+            ><input
+              id="search"
+              placeholder="Buscar un evento o aula…"
+              aria-label="Buscar evento o aula"
+            />
+          </div>
+          <div class="select-filters">
+            <select id="room-filter" aria-label="Filtrar por aula">
+              <option value="">Todas las aulas</option>
+              <option value="unknown">Sin especificar</option></select
+            ><select id="category-filter" aria-label="Filtrar por categoría">
+              <option value="">Todas las categorías</option>
+              <option value="clase">Clase</option>
+              <option value="informativo">Informativo</option>
+              <option value="por_clasificar">Por clasificar</option>
+            </select>
+          </div>
+        </div>
+        <div id="calendar-content"></div>
+        <div class="calendar-footer">
+          <span
+            ><i class="legend-dot"></i>El color identifica el calendario de
+            origen</span
+          ><span id="footer-count"></span>
+        </div>
+      </section>
+      <div class="bottom-note">
+        <span>ⓘ</span>
+        <p>
+          Los eventos simultáneos se muestran por separado. Los datos
+          desconocidos se mantienen como <strong>«Sin especificar»</strong>.
+        </p>
+        <span class="demo-week">Semana de demostración</span>
+      </div>
+    </main>
+    <dialog id="event-dialog" aria-labelledby="dialog-title">
+      <div class="dialog-accent" id="dialog-accent"></div>
+      <button class="close-dialog" id="close-dialog" aria-label="Cerrar ficha">
+        ×
+      </button>
+      <div id="dialog-content"></div>
+    </dialog>
+    <dialog id="help-dialog" aria-labelledby="help-title">
+      <button class="close-dialog" id="close-help" aria-label="Cerrar ayuda">
+        ×
+      </button>
+      <div class="help-content">
+        <span class="eyebrow">AULASYNC · INCREMENTO 1</span>
+        <h2 id="help-title">Tu calendario, con contexto</h2>
+        <p>
+          Esta demo usa datos ficticios inspirados en la estructura de las
+          cuatro tablas de referencia y en los casos observados al revisar los
+          calendarios.
+        </p>
+        <p>
+          Prueba los filtros, cambia de semana o abre un evento para consultar
+          sus detalles. «Hoy» lleva a la fecha actual de Lima; «Semana demo»
+          vuelve a los ejemplos.
+        </p>
+        <p>
+          No hay conexión con Google Calendar, MySQL ni guardados persistentes.
+        </p>
+        <button id="demo-week" class="primary-button">
+          Volver a la semana demo
+        </button>
+      </div>
+    </dialog>
+  </body>
+</html>
