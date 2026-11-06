@@ -29,3 +29,13 @@ Los 30 eventos son ficticios. La estructura toma como referencia `calendarios`, 
 No se conecta ni modifica Google Calendar ni MySQL. No hay autenticación, persistencia, estados operativos ni tareas reales. Las métricas resumen el período visible y los filtros activos. «Por revisar» comprende datos de clase incompletos, eventos por clasificar y discrepancias explícitas; no representa un estado operativo.
 
 La fuente web es opcional; sin Internet se usan fuentes del sistema. Este prototipo permite validar diseño y comportamiento antes de trasladarlo al stack Next.js/TypeScript previsto. No sustituye la implementación final.
+
+## Organización del código
+
+Los ejemplos están en `data.js`; `calendar.js` concentra las fechas, filtros y solapamientos; `views.js` genera HTML y `app.js` controla la interacción con la página. El HTML carga los cuatro scripts en orden con `defer`, también al abrirlo directamente. Consulta [la guía de colaboración](../CONTRIBUTING.md) antes de modificar o agregar módulos.
+
+Para ejecutar las pruebas sin instalar paquetes:
+
+```sh
+node prototipo/verify.cjs
+```
