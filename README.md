@@ -27,3 +27,17 @@ node prototipo/verify.cjs
 - `AulaSync_*.md`: contexto, alcance e instrucciones de desarrollo originales.
 
 La demo no conecta con Google Calendar ni guarda datos. El stack Next.js/TypeScript de los documentos corresponde al desarrollo previsto; el prototipo actual permite revisar primero la experiencia visual.
+
+## Mantenimiento y legibilidad
+
+Consulta [CONTRIBUTING.md](CONTRIBUTING.md) para conocer los módulos, las convenciones de código y las comprobaciones. El código usa bloques multilínea y formato compartido:
+
+```sh
+npm ci
+npm run format
+npm run format:check
+npm run check:syntax
+npm test
+```
+
+Las herramientas de formato son opcionales para ejecutar la demo. No hay dependencias de producción.

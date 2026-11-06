@@ -1,0 +1,15 @@
+{
+  "name": "aulasync-prototipo",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "start": "node prototipo/server.cjs",
+    "test": "node prototipo/verify.cjs",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check:syntax": "node --check prototipo/data.js && node --check prototipo/calendar.js && node --check prototipo/views.js && node --check prototipo/app.js && node --check prototipo/server.cjs && node --check prototipo/verify.cjs"
+  },
+  "devDependencies": {
+    "prettier": "3.9.10"
+  }
+}
